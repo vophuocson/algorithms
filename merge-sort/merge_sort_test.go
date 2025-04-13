@@ -83,7 +83,6 @@ func TestMergeSort(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		// Tạo một bản sao của input để không bị thay đổi bởi hàm MergeSort
 		arrCopy := make([]int, len(tt.input))
 		copy(arrCopy, tt.input)
 
