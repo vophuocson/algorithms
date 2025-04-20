@@ -1,6 +1,8 @@
 package quicksort
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestPartition(t *testing.T) {
 	tests := []struct {
@@ -92,4 +94,63 @@ func TestQuickSort(t *testing.T) {
 			}
 		}
 	}
+}
+
+func TestQuicksortWithHoarePartition(t *testing.T) {
+	testCases := []struct {
+		name     string
+		input    []int
+		expected []int
+	}{
+		{
+			name:     "Unsorted array",
+			input:    []int{5, 3, 8, 4, 2, 7, 1, 10},
+			expected: []int{1, 2, 3, 4, 5, 7, 8, 10},
+		},
+		{
+			name:     "Already sorted",
+			input:    []int{1, 2, 3, 4, 5},
+			expected: []int{1, 2, 3, 4, 5},
+		},
+		{
+			name:     "Reverse sorted",
+			input:    []int{9, 8, 7, 6, 5},
+			expected: []int{5, 6, 7, 8, 9},
+		},
+		{
+			name:     "All elements equal",
+			input:    []int{7, 7, 7, 7},
+			expected: []int{7, 7, 7, 7},
+		},
+		{
+			name:     "With duplicates",
+			input:    []int{4, 2, 4, 3, 2},
+			expected: []int{2, 2, 3, 4, 4},
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			arr := make([]int, len(tc.input))
+			copy(arr, tc.input)
+
+			QuicksortWithHoarePartition(arr, 0, len(arr)-1)
+
+			if !equal(arr, tc.expected) {
+				t.Errorf("expected %v, got %v", tc.expected, arr)
+			}
+		})
+	}
+}
+
+func equal(a, b []int) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i := range a {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+	return true
 }
