@@ -13,7 +13,9 @@ func RandomIntInRange(min, max int) int {
 }
 
 func Partition(arr []int, left, right int) int {
-	x := arr[RandomIntInRange(left, right)]
+	idxPivot := RandomIntInRange(left, right)
+	arr[idxPivot], arr[right] = arr[right], arr[idxPivot]
+	x := arr[right]
 	i := left - 1
 	for j := left; j <= right-1; j++ {
 		if arr[j] <= x {
