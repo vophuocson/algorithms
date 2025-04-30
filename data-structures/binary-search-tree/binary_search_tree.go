@@ -94,3 +94,38 @@ func TreeInsert(t *Tree, node *Node) {
 		}
 	}
 }
+
+func Transplant(t *Tree, u, v *Node) {
+	if u.Parent == nil {
+		t.Root = v
+	} else if u == u.Parent.Left {
+		u.Parent.Left = v
+	} else {
+		u.Parent.Right = v
+	}
+	if v != nil {
+		v.Parent = u.Parent
+	}
+}
+
+func DeleteNode(t *Tree, z *Node) {
+	if z.Left == nil {
+		Transplant(t, z, z.Right)
+	} else if z.Right == nil {
+		Transplant(t, z, z.Left)
+	} else {
+		successor := Minimum(z.Right)
+		if successor.Parent != z {
+			Transplant(t, successor, successor.Right)
+			successor.Right = z.Right
+			if successor.Right != nil {
+				successor.Right.Parent = successor
+			}
+		}
+		Transplant(t, z, successor)
+		successor.Left = z.Left
+		if successor.Left != nil {
+			successor.Left.Parent = successor
+		}
+	}
+}
