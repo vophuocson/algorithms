@@ -52,5 +52,5 @@ func Maximum(node *Node) *Node {
 	if node.Right == nil {
 		return node
 	}
-	return Minimum(node.Right)
+	return Maximum(node.Right)
 }
