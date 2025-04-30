@@ -20,3 +20,17 @@ func InOrderTreeWalk(n *Node) {
 		InOrderTreeWalk(n.Right)
 	}
 }
+
+func TreeSearch(node *Node, key int) *Node {
+	if node == nil {
+		return nil
+	}
+	if node.Key == key {
+		return node
+	}
+	if node.Key > key {
+		return TreeSearch(node.Left, key)
+	} else {
+		return TreeSearch(node.Right, key)
+	}
+}
