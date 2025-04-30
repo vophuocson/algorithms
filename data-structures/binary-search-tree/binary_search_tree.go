@@ -54,3 +54,20 @@ func Maximum(node *Node) *Node {
 	}
 	return Maximum(node.Right)
 }
+
+func TreeSuccessor(node *Node) *Node {
+	if node == nil {
+		return nil
+	}
+	if node.Right != nil {
+		return Minimum(node.Right)
+	}
+	parent := node.Parent
+	x := node
+	for parent != nil && parent.Right == x {
+		x = parent
+		parent = parent.Parent
+	}
+
+	return parent
+}
