@@ -44,3 +44,13 @@ func Minimum(node *Node) *Node {
 	}
 	return Minimum(node.Left)
 }
+
+func Maximum(node *Node) *Node {
+	if node == nil {
+		return nil
+	}
+	if node.Right == nil {
+		return node
+	}
+	return Minimum(node.Right)
+}
