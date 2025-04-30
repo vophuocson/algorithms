@@ -71,3 +71,26 @@ func TreeSuccessor(node *Node) *Node {
 
 	return parent
 }
+
+func TreeInsert(t *Tree, node *Node) {
+	var y *Node
+	x := t.Root
+	for x != nil {
+		y = x
+		if x.Key > node.Key {
+			x = x.Left
+		} else {
+			x = x.Right
+		}
+	}
+	if y == nil {
+		t.Root = node
+	} else {
+		node.Parent = y
+		if y.Key > node.Key {
+			y.Left = node
+		} else {
+			y.Right = node
+		}
+	}
+}
