@@ -34,3 +34,13 @@ func TreeSearch(node *Node, key int) *Node {
 		return TreeSearch(node.Right, key)
 	}
 }
+
+func Minimum(node *Node) *Node {
+	if node == nil {
+		return nil
+	}
+	if node.Left == nil {
+		return node
+	}
+	return Minimum(node.Left)
+}
